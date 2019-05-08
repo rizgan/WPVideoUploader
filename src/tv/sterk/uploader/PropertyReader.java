@@ -7,10 +7,10 @@ public class PropertyReader {
 
     static Properties properties;
 
-    public PropertyReader() throws IOException {
+    public PropertyReader(String pathToConfigFile) throws IOException {
 
         properties = new Properties();
-        FileInputStream in = new FileInputStream("D:\\MedyaHaberTV\\Misto\\Configurations\\config.properties");
+        FileInputStream in = new FileInputStream(pathToConfigFile);
         properties.load(in);
     }
 }

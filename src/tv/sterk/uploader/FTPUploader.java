@@ -29,7 +29,8 @@ public class FTPUploader {
         }
         ftp.login(user, pwd);
         ftp.setFileType(FTP.BINARY_FILE_TYPE);
-        ftp.enterLocalPassiveMode();
+//        ftp.enterLocalPassiveMode();
+        ftp.enterLocalActiveMode();
     }
 
     public void uploadFile(String localFileFullName, String fileName, String hostDir)

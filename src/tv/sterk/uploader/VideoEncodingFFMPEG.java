@@ -16,7 +16,7 @@ public class VideoEncodingFFMPEG {
     static FFmpegBuilder thumbnailBuilder;
     static FFmpegExecutor executor;
 
-    public VideoEncodingFFMPEG(String inputVideoFile, String outputVideoFile) throws IOException {
+    public VideoEncodingFFMPEG(String inputVideoFile, String outputVideoFile, String pathToLogoFile) throws IOException {
 
         ffmpeg = new FFmpeg(PropertyReader.properties.getProperty("ffmpegDirectory"));
         ffprobe = new FFprobe(PropertyReader.properties.getProperty("ffprobeDirectory"));
@@ -24,14 +24,14 @@ public class VideoEncodingFFMPEG {
         builder = new FFmpegBuilder()     // Filename, or a FFmpegProbeResult
                 .overrideOutputFiles(true) // Override the output if it exists
                 .addInput(inputVideoFile)
-                .addInput("D:\\MedyaHaberTV\\Misto\\Configurations\\mh.png")
+                .addInput(pathToLogoFile)
                 .setComplexFilter("[0:v][1:v] overlay=55:55") //WORKING BAD
                 .addOutput(outputVideoFile)   // Filename for the destination
                 .setFormat("mp4")        // Format is inferred from filename, or can be set
                 .setAudioCodec("aac")        // using the aac codec
                 .setVideoCodec("libx264")    // Video using x264
                 .setVideoCodec("h264_nvenc")
-                .addExtraArgs("-level", "3.1")
+                .addExtraArgs("-level", "4.1")
 //                .addExtraArgs("-qmin", "18")
 //                .addExtraArgs("-qmax", "53")
                 .addExtraArgs("-crf", "23")

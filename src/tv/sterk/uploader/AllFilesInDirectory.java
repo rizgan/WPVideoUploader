@@ -10,7 +10,7 @@ import java.util.List;
 public class AllFilesInDirectory {
 
     List<String> results;
-    public PropertyReader propertyReader = new PropertyReader();
+    public PropertyReader propertyReader = new PropertyReader("D:\\MedyaHaberTV\\Misto\\Configurations\\config.properties");
 
     public AllFilesInDirectory() throws IOException {
         results = new ArrayList<String>();

@@ -7,6 +7,10 @@ import java.util.Date;
 
 public class Main {
 
+    //E:\SterkTV\video\
+    //D:\SterkTV\Misto\Configurations\sterk.png
+    //D:\SterkTV\Misto\Configurations\config.properties
+
     static int counter;
 
     public static void main(String[] args) throws Exception {
@@ -15,7 +19,7 @@ public class Main {
         Date date = new Date();
         System.out.println(dateFormat.format(date) + " - Started");
 
-        PropertyReader propertyReader = new PropertyReader();
+        PropertyReader propertyReader = new PropertyReader("D:\\MedyaHaberTV\\Misto\\Configurations\\config.properties");
         AllFilesInDirectory allFilesInDirectory = new AllFilesInDirectory();
 
         FTPUploader ftpUploader = null;
@@ -36,7 +40,8 @@ public class Main {
             inputVideoFile = localVideoDirectory + allFilesInDirectory.results.get(i);
             outputVideoFile = tmpVideoDirectory + allFilesInDirectory.results.get(i).replace(".mpg", ".mp4").replace(".avi", ".mp4");
 
-            videoEncodingFFMPEG = new VideoEncodingFFMPEG(inputVideoFile, outputVideoFile);
+
+            videoEncodingFFMPEG = new VideoEncodingFFMPEG(inputVideoFile, outputVideoFile, "D:\\MedyaHaberTV\\Misto\\Configurations\\mh.png");
 
             videoEncodingFFMPEG.executor.createJob(VideoEncodingFFMPEG.builder).run();
             date = new Date();
@@ -47,7 +52,7 @@ public class Main {
 
             ftpUploader = new FTPUploader(PropertyReader.properties.getProperty("ftpHost"), PropertyReader.properties.getProperty("ftpUser"), PropertyReader.properties.getProperty("ftpPassword"));
 
-            ftpUploader.uploadFile(tmpVideoDirectory + allFilesInDirectory.results.get(i).replace(".mpg", ".mp4").replace(".avi", ".mp4"), allFilesInDirectory.results.get(i).replace(".mpg", ".mp4").replace(".avi", ".mp4"), "/public_html/video/");
+            ftpUploader.uploadFile(tmpVideoDirectory + allFilesInDirectory.results.get(i).replace(".mpg", ".mp4").replace(".avi", ".mp4"), allFilesInDirectory.results.get(i).replace(".mpg", ".mp4").replace(  ".avi", ".mp4"), "/public_html/video/");
 
             date = new Date();
             System.out.println("\r\n" + dateFormat.format(date) + " - File uploaded on ftp-server");
@@ -57,6 +62,8 @@ public class Main {
             wpPoster = new WPPoster(allFilesInDirectory.results.get(i));
             date = new Date();
             System.out.println("\r\n" + dateFormat.format(date) + " - Published on WP");
+
+            proc = rt.exec("cmd /c copy \"" + outputVideoFile + "\" E:\\MedyaHaberTV\\video\\ /Y"); //Copy to Backup!
 
             proc = rt.exec("cmd /c del \"" + outputVideoFile + "\" /s /q");
             proc = rt.exec("cmd /c del \"" + outputVideoFile.replace(".mp4", ".png") + "\" /s /q");
