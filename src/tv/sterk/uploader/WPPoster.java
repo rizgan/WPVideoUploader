@@ -50,7 +50,25 @@ public class WPPoster {
             MediaItem r = wp.getMediaItem(mediaUploaded.getId());
 
             recentPost.setTerms(Arrays.asList(new Term[]{term1}));
-            recentPost.setPost_title(fileNameOnFTP.replace("_", " ").replace(".mp4", "").replace(".mpg", "").substring(4));
+            recentPost.setPost_title(fileNameOnFTP.replace("_", " ").replace("C^", "Ç")
+                    .replace("c^", "ç")
+                    .replace("i^^", "ı")
+                    .replace("I^^", "İ")
+                    .replace("U^^", "Ü")
+                    .replace("u^^", "ü")
+                    .replace("E^", "Ê")
+                    .replace("e^", "ê")
+                    .replace("I^", "Î")
+                    .replace("i^", "î")
+                    .replace("S^", "Ş")
+                    .replace("s^", "ş")
+                    .replace("U^", "Û")
+                    .replace("u^", "û")
+                    .replace("G^", "Ğ")
+                    .replace("g^", "ğ")
+                    .replace("O^", "Ö")
+                    .replace("o^", "ö")
+                    .replace(".^", ":").replace(".mp4", "").replace(".mpg", "").substring(4));
             recentPost.setPost_content("[clappr media=\"/video/" + fileNameOnFTP.replace(".mpg", ".mp4").replace(".avi", ".mp4") + "\" type=\"video/mp4\" autoplay=\"yes\"]");
             recentPost.setPost_status("publish");
             recentPost.setPost_format("Video");
