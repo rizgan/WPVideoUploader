@@ -6,10 +6,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Main {
+    //29 VideoEncodingFFMPEG
+    //AllFilesInDirectory
+    //29 - D:\SterkTV\Misto\Configurations\config.properties
+    //51 - D:\SterkTV\Misto\Configurations\sterk.png
+    //70 - E:\SterkTV\video\
 
-    //E:\SterkTV\video\
-    //D:\SterkTV\Misto\Configurations\sterk.png
-    //D:\SterkTV\Misto\Configurations\config.properties
+    //AllFilesInDirectory
+    //29 - D:\MedyaHaberTV\Misto\Configurations\config.properties
+    //51 - D:\MedyaHaberTV\Misto\Configurations\mh.png
+    //70 - E:\MedyaHaberTV\video\
+    //72 - WPPOster
 
     static int counter;
 
